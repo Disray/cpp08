@@ -6,7 +6,7 @@
 /*   By: rrichard <rrichard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:11:20 by rrichard          #+#    #+#             */
-/*   Updated: 2025/02/20 18:51:20 by rrichard         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:49:42 by rrichard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,8 @@ int		Span::longestSpan() const
 	if (this->numbers.size() <= 1)
 		throw std::invalid_argument("Cannot find longest span: not enough numbers.");
 
-	int	longest = std::numeric_limits<int>::min();
-	for (size_t i = 0; i < numbers.size(); ++i)
-	{
-		for (size_t j = i + 1; j < numbers.size(); j++)
-		{
-			int span = std::abs(numbers[j] - numbers[i]);
-			if (span > longest)
-				longest = span;
-		}
-	}
+	std::vector<int>	sortedNumbers = numbers;
+	std::sort(sortedNumbers.begin(), sortedNumbers.end());
+	int	longest = sortedNumbers[sortedNumbers.size() - 1] - sortedNumbers[0];
 	return (longest);
 }
